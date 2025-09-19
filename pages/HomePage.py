@@ -5,6 +5,7 @@ class HomePage:
         self.page.set_default_timeout(20000)
         self.signup_login_button=self.page.locator("//li//a[@href='/login']")
         self.contact_us_button=self.page.locator("//li//a[@href='/contact_us']")
+        self.test_cases_button=self.page.locator("//li//a[@href='/test_cases']")
 
 
     def goto(self):
@@ -15,3 +16,6 @@ class HomePage:
 
     def click_contact_us(self):
         self.contact_us_button.click()
+
+    def click_test_cases(self):
+        self.test_cases_button.click()
