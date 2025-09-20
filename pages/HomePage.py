@@ -6,7 +6,7 @@ class HomePage:
         self.signup_login_button=self.page.locator("//li//a[@href='/login']")
         self.contact_us_button=self.page.locator("//li//a[@href='/contact_us']")
         self.test_cases_button=self.page.locator("//li//a[@href='/test_cases']")
-
+        self.products_button=self.page.locator("//li//a[@href='/products']")
 
     def goto(self):
         self.page.goto(self.context.HOME_PAGE_URL)
@@ -19,3 +19,6 @@ class HomePage:
 
     def click_test_cases(self):
         self.test_cases_button.click()
+
+    def click_products(self):
+        self.products_button.click()

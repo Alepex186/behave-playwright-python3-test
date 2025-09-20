@@ -7,6 +7,7 @@ from pages.ContactUsPage import ContactUsPage
 from pages.HomePage import HomePage
 from pages.LogOutPage import LogOutPage
 from pages.LoginPage import LoginPage
+from pages.ProductsPage import ProductsPage
 from pages.RegisterPage import RegisterPage
 from pages.TestCasesPage import TestCasesPage
 
@@ -42,6 +43,7 @@ def before_scenario(context,scenario):
     context.log_out_page=LogOutPage(context)
     context.contact_us_page=ContactUsPage(context)
     context.test_cases_page=TestCasesPage(context)
+    context.products_page=ProductsPage(context)
 
 def after_scenario(context,scenario):
     context.page.close()
