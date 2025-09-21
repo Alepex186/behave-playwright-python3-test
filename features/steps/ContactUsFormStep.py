@@ -3,7 +3,6 @@ from behave import *
 from pages.ContactUsPage import ContactUsPage
 from pages.HomePage import HomePage
 
-use_step_matcher("re")
 
 
 @when("El usuario hace click en el boton Contact us")

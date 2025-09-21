@@ -2,8 +2,6 @@ from behave import *
 
 from pages.LogOutPage import LogOutPage
 
-use_step_matcher("re")
-
 
 @when("El usuario hace click en el boton LogOut")
 def step_impl(context):

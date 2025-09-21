@@ -4,8 +4,6 @@ from behave import *
 from pages.HomePage import HomePage
 from pages.ProductsPage import ProductsPage
 
-use_step_matcher("re")
-
 
 @when("El usuario hace click en el boton Products")
 def step_impl(context):

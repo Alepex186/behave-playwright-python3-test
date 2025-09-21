@@ -1,5 +1,3 @@
-import time
-
 from behave import *
 
 from pages.RegisterPage import RegisterPage
@@ -45,5 +43,4 @@ def step_impl8(context,correo):
 @then("El usuario deberia visualizar el mensaje Email Address already exist!")
 def step_impl9(context):
     register_page:RegisterPage=context.register_page
-    time.sleep(3)
     register_page.verify_text_in_page("Email Address already exist!")
