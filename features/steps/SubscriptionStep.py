@@ -25,3 +25,9 @@ def step_impl4(context):
     subscription_page:SubscriptionPage=context.subscription_page
     mensaje="You have been successfully subscribed!"
     subscription_page.verify_text_in_page(mensaje)
+
+
+@step("El usuario hace click en el boton Cart")
+def step_impl5(context):
+    home_page:HomePage=context.home_page
+    home_page.click_cart()

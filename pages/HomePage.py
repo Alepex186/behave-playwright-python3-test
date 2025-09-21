@@ -11,6 +11,7 @@ class HomePage:
         self.test_cases_button=self.page.locator("//li//a[@href='/test_cases']")
         self.products_button=self.page.locator("//li//a[@href='/products']")
         self.footer=self.page.locator("footer")
+        self.cart_button=self.page.locator("//li//a[@href='/view_cart']")
 
     def goto(self):
         self.page.goto(self.context.HOME_PAGE_URL)
@@ -29,3 +30,6 @@ class HomePage:
 
     def scroll_to_footer(self):
         self.footer.scroll_into_view_if_needed()
+
+    def click_cart(self):
+        self.cart_button.click()
