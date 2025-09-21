@@ -15,7 +15,6 @@ def step_impl(context):
 def step_impl(context):
     datos=context.table
     datos=datos[0]
-    print(datos)
     nombre=datos[0]
     correo=datos[1]
     asunto=datos[2]

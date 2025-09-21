@@ -2,7 +2,6 @@ import time
 
 from behave import *
 
-from pages.HomePage import HomePage
 from pages.RegisterPage import RegisterPage
 
 
