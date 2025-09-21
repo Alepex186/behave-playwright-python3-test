@@ -10,6 +10,7 @@ from pages.LoginPage import LoginPage
 from pages.ProductsPage import ProductsPage
 from pages.RegisterPage import RegisterPage
 from pages.SearchProductPage import SearchProductPage
+from pages.SubscriptionPage import SubscriptionPage
 from pages.TestCasesPage import TestCasesPage
 
 load_dotenv()
@@ -46,6 +47,7 @@ def before_scenario(context,scenario):
     context.test_cases_page=TestCasesPage(context)
     context.products_page=ProductsPage(context)
     context.search_product_page=SearchProductPage(context)
+    context.subscription_page=SubscriptionPage(context)
 
 def after_scenario(context,scenario):
     context.page.close()
