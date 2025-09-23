@@ -37,8 +37,12 @@ class RegisterPage:
 
 
 
-    def fill_firtsname(self):
-        self.name_input.fill(self.faker.first_name())
+    def fill_firtsname(self,nombre=None):
+        if nombre is None:
+            self.name_input.fill(self.faker.first_name())
+        else:
+            self.name_input.fill(nombre)
+
 
     def fill_email(self,correo=None):
         if correo is None:

@@ -5,13 +5,14 @@ from pages.HomePage import HomePage
 
 
 
-@when("El usuario hace click en el boton Contact us")
+@Given("El usuario está en la página de Contact us")
 def step_impl(context):
     home_page:HomePage=context.home_page
+    home_page.goto()
     home_page.click_contact_us()
 
 @step("El usuario rellena el formulario de Contact us con")
-def step_impl(context):
+def step_impl2(context):
     datos=context.table
     datos=datos[0]
     nombre=datos[0]
@@ -25,19 +26,15 @@ def step_impl(context):
 
 
 
-@step("El usuario hace click en el boton Submit del apartado Contact us")
-def step_impl(context):
+@step("El usuario envía el formulario de Contact us")
+def step_impl3(context):
     contact_us_page:ContactUsPage=context.contact_us_page
     contact_us_page.click_submit()
-
-@step("El usuario hace click en aceptar en el dialogo")
-def step_impl(context):
-    contact_us_page: ContactUsPage = context.contact_us_page
     contact_us_page.click_accept_dialog()
 
 
-@then("El usuario deberia visualizar el mensaje Success! Your details have been submitted successfully.")
-def step_impl(context):
+@then('El usuario debería visualizar el mensaje "Success! Your details have been submitted successfully."')
+def step_impl4(context):
     contact_us_page: ContactUsPage = context.contact_us_page
     text="El usuario deberia visualizar el mensaje Success! Your details have been submitted successfully."
     contact_us_page.verify_text_in_page(text)

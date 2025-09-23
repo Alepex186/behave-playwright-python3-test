@@ -4,13 +4,14 @@ from pages.HomePage import HomePage
 from pages.LoginPage import LoginPage
 
 
-@Given("El usuario esta en la pagina principal")
+@Given("El usuario está en la página principal")
 def pagina_principal(context):
     context.home_page.goto()
 
-@Given("El usuario hace click en el boton Registrarse / Iniciar sesión")
+@Given("El usuario esta en la sección de login en la página Signup / Login")
 def click_boton_iniciar_session(context):
     home_page:HomePage=context.home_page
+    home_page.goto()
     home_page.click_signup_login()
 
 @When("El usuario ingresa su correo {correo} en el login")
@@ -23,18 +24,18 @@ def ingresar_contrasenia(context,contrasenia):
     login_page:LoginPage=context.login_page
     login_page.fill_password(contrasenia)
 
-@When("El usuario hace click en el boton login")
+@When("El usuario envía el formulario de login")
 def click_boton_login(context):
     login_page:LoginPage=context.login_page
     login_page.click_login()
 
-@Then("Deberia mostrarse en el header el mensaje Logged in as")
+@Then('Deberia mostrarse en el header el mensaje "Logged in as"')
 def verificar_mensaje_correcto(context):
     mensaje_correcto='Logged in as'
     login_page:LoginPage=context.login_page
     login_page.verify_page(mensaje_correcto)
 
-@then("Deberia mostrarse en el mensaje Your email or password is incorrect!")
+@then('Deberia mostrarse en el mensaje "Your email or password is incorrect!"')
 def verificar_mensaje_incorrecto(context):
     mensaje_incorrecto= "Your email or password is incorrect!"
     login_page:LoginPage=context.login_page
