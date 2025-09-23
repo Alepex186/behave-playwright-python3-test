@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from faker import Faker
 
+from pages.CartPage import CartPage
 from pages.ContactUsPage import ContactUsPage
 from pages.HomePage import HomePage
 from pages.LogOutPage import LogOutPage
@@ -48,6 +49,7 @@ def before_scenario(context,scenario):
     context.products_page=ProductsPage(context)
     context.search_product_page=SearchProductPage(context)
     context.subscription_page=SubscriptionPage(context)
+    context.cart_page=CartPage(context)
 
 def after_scenario(context,scenario):
     context.page.close()
