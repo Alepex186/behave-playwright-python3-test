@@ -22,3 +22,8 @@ def step_impl3(context):
     products_page:ProductsPage=context.products_page
     products_page.verify_view_product()
 
+
+@when("El usuario navega a la página de Products")
+def step_impl4(context):
+    home_page:HomePage=context.home_page
+    home_page.click_products()

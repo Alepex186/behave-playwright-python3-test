@@ -14,7 +14,3 @@ def step_impl3(context):
     search_product_page:SearchProductPage=context.search_product_page
     search_product_page.verify_products()
 
-
-@when("El usuario navega a la página de Products")
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When El usuario navega a la página de Products')

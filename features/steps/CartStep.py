@@ -66,3 +66,11 @@ def step_impl9(context):
 def step_impl10(context):
     cart_page: CartPage = context.cart_page
     cart_page.verify_removed_product_in_cart(1)
+
+
+@when("El usuario agrega un producto al carrito y cierra la ventana emergente")
+def step_impl(context):
+    cart_page:CartPage=context.cart_page
+    cart_page.add_product_in_cart(1)
+    cart_page.verify_text_in_page("Your product has been added to cart.")
+    cart_page.click_continue_shopping_button()

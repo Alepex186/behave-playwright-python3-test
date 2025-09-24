@@ -54,7 +54,19 @@ def step_impl6(context):
 
 
 @when("El usuario ingresa su nombre {nombre} y el correo {correo} en el formulario inicial de registro")
-def step_impl(context,nombre,correo):
+def step_impl7(context,nombre,correo):
     register_page:RegisterPage=context.register_page
     register_page.fill_firtsname(nombre)
     register_page.fill_email(correo)
+
+
+@when("El usuario registra una nueva cuenta")
+def step_impl8(context):
+    register_page:RegisterPage=context.register_page
+    register_page.fill_firtsname()
+    register_page.fill_email()
+    register_page.click_signup_button()
+    register_page.verify_text_in_page("Enter Account Information")
+    register_page.fill_formulary()
+    register_page.click_create_account_button()
+    register_page.verify_text_in_page("Account Created!")
