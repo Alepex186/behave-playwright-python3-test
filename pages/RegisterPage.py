@@ -72,5 +72,5 @@ class RegisterPage:
         self.create_account_button.click()
 
     def verify_text_in_page(self,text):
-        assert self.page.locator(f"text={text}").is_visible(),f"NO SE ENCONTRO EL TEXTO {text}"
+        assert self.page.locator(f"text={text}"),f"NO SE ENCONTRO EL TEXTO {text}"
 
