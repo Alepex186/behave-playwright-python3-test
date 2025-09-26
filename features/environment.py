@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from faker import Faker
 
 from pages.CartPage import CartPage
-from pages.CategoryProductsPage import CategoryProductsPage
+from pages.FilterProductsPage import FilterProductsPage
 from pages.CheckOutPage import CheckOutPage
 from pages.ContactUsPage import ContactUsPage
 from pages.HomePage import HomePage
@@ -53,7 +53,8 @@ def before_scenario(context,scenario):
     context.subscription_page=SubscriptionPage(context)
     context.cart_page=CartPage(context)
     context.check_out_page=CheckOutPage(context)
-    context.category_products_page=CategoryProductsPage(context)
+    context.filter_products_page=FilterProductsPage(context)
+
 
 def after_scenario(context,scenario):
     context.page.close()
