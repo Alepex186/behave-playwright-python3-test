@@ -52,6 +52,16 @@ def iniciar_sesion_completo(context,correo,contrasenia):
     login_page.fill_password(contrasenia)
     login_page.click_login()
 
+@step("El usuario inicia sesión con las credenciales {correo} {contrasenia}")
+def iniciar_sesion_completo(context,correo,contrasenia):
+    home_page:HomePage=context.home_page
+    home_page.goto()
+    home_page.click_signup_login()
+    login_page:LoginPage=context.login_page
+    login_page.fill_email(correo)
+    login_page.fill_password(contrasenia)
+    login_page.click_login()
+
 
 @given("El usuario esta en la pagina de login / registro")
 def step_impl(context):
