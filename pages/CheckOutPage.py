@@ -12,7 +12,8 @@ class CheckOutPage:
         button.click()
 
     def verify_text_in_page(self, text):
-        assert self.page.locator(f"text='{text}'"),f"NO SE ENCONTRO EL TEXTO {text}"
+        locator = self.page.locator(f"text='{text}'")
+        assert locator.count() > 0, f"No se encontró el texto: {text}"
 
     def click_place_order_button(self):
         button=self.page.locator("div a.btn.btn-default.check_out")

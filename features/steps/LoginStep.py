@@ -33,13 +33,13 @@ def click_boton_login(context):
 def verificar_mensaje_correcto(context):
     mensaje_correcto='Logged in as'
     login_page:LoginPage=context.login_page
-    login_page.verify_page(mensaje_correcto)
+    login_page.verify_text_in_page(mensaje_correcto)
 
 @then('Deberia mostrarse en el mensaje "Your email or password is incorrect!"')
 def verificar_mensaje_incorrecto(context):
     mensaje_incorrecto= "Your email or password is incorrect!"
     login_page:LoginPage=context.login_page
-    login_page.verify_page(mensaje_incorrecto)
+    login_page.verify_text_in_page(mensaje_incorrecto)
 
 
 @given("El usuario esta logueado con las credenciales {correo} {contrasenia}")

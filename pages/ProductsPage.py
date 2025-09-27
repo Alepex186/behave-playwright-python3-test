@@ -30,4 +30,21 @@ class ProductsPage:
         assert "New" in product_condition.text_content()
         assert len(product_brand.text_content().split(":")[1]) > 2
 
+    def fill_review(self, nombre, correo, descripcion):
+        name_input=self.page.locator("input#name")
+        name_input.fill(nombre)
+
+        email_input=self.page.locator("input#email")
+        email_input.fill(correo)
+
+        review_textarea=self.page.locator("textarea#review")
+        review_textarea.fill(descripcion)
+
+    def send_review_formulary(self):
+        submit_button=self.page.locator("button#button-review")
+        submit_button.click()
+
+    def verify_text_in_page(self, text):
+        locator = self.page.locator(f"text='{text}'")
+        assert locator.count() > 0, f"No se encontró el texto: {text}"
 

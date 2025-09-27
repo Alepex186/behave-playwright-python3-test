@@ -15,4 +15,5 @@ class SubscriptionPage:
         self.subscription_button.click()
 
     def verify_text_in_page(self, mensaje):
-        assert self.page.locator(f"text={mensaje}").is_visible()
+        locator = self.page.locator(f"text='{mensaje}'")
+        assert locator.count() > 0, f"No se encontró el texto: {mensaje}"

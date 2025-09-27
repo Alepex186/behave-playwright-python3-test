@@ -52,5 +52,5 @@ class CartPage:
     def verify_product_index_in_page(self,index):
         tbody=self.page.locator("tbody")
 
-
-        assert tbody.locator(f"tr#product-{index}"),f"No se encontro el elemento con id: {index}"
+        product=tbody.locator(f"tr#product-{index}")
+        assert product.count() >0 ,f"No se encontro el elemento con id: {index}"

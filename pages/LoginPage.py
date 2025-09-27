@@ -21,5 +21,6 @@ class LoginPage:
         self.password_input.fill(password)
         self.login_button.click()
 
-    def verify_page(self,mensaje:str):
-        assert self.page.locator(f"text={mensaje}").is_visible(),"ERROR AL VERIFICAR"
+    def verify_text_in_page(self,mensaje:str):
+        locator = self.page.locator(f"text='{mensaje}'")
+        assert locator.count() > 0, f"No se encontró el texto: {mensaje}"

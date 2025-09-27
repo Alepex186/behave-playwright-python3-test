@@ -21,8 +21,8 @@ class FilterProductsPage:
 
 
     def verify_text_in_page(self, text):
-        assert self.page.locator(f"text={text}"),"No se encontro el texto"
-
+        locator = self.page.locator(f"text='{text}'")
+        assert locator.count() > 0, f"No se encontró el texto: {text}"
 
     def click_brand_button(self, brand):
         brand_button=self.page.locator("a[href^='/brand_products/']",has_text=re.compile(r"\s*" + re.escape(brand) + r"\s*"))

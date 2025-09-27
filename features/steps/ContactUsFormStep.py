@@ -30,11 +30,9 @@ def step_impl2(context):
 def step_impl3(context):
     contact_us_page:ContactUsPage=context.contact_us_page
     contact_us_page.click_submit()
-    contact_us_page.click_accept_dialog()
-
 
 @then('El usuario debería visualizar el mensaje "Success! Your details have been submitted successfully."')
 def step_impl4(context):
     contact_us_page: ContactUsPage = context.contact_us_page
-    text="El usuario deberia visualizar el mensaje Success! Your details have been submitted successfully."
+    text="Success! Your details have been submitted successfully."
     contact_us_page.verify_text_in_page(text)
