@@ -12,6 +12,9 @@ class HomePage:
         self.products_button=self.page.locator("//li//a[@href='/products']")
         self.footer=self.page.locator("footer")
         self.cart_button=self.page.locator("//li//a[@href='/view_cart']")
+        self.section_recommended_items=self.page.locator("div.recommended_items")
+
+
 
     def goto(self):
         self.page.goto(self.context.HOME_PAGE_URL)
@@ -33,3 +36,10 @@ class HomePage:
 
     def click_cart(self):
         self.cart_button.click()
+
+    def scroll_to_recommended_items(self):
+        self.section_recommended_items.scroll_into_view_if_needed()
+
+    def add_product_in_cart(self, index):
+        product_add_to_cart=self.section_recommended_items.locator(f"a[data-product-id='{index}']")
+        product_add_to_cart.first.click()
