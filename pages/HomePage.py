@@ -43,3 +43,11 @@ class HomePage:
     def add_product_in_cart(self, index):
         product_add_to_cart=self.section_recommended_items.locator(f"a[data-product-id='{index}']")
         product_add_to_cart.first.click()
+
+    def delete_account(self):
+        delete_account_button=self.page.locator("a[href='/delete_account']")
+        delete_account_button.click()
+
+    def verify_text_in_page(self, text):
+        locator = self.page.locator(f"text={text}")
+        assert locator.count() > 0, f"No se encontró el texto: {text}"

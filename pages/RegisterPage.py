@@ -1,7 +1,22 @@
 from faker import Faker
 
 
+class Address:
+    def __init__(self, address_data, address2_data, zipcode_data, city_data,state_data):
+        self.address_data=address_data
+        self.address2_data=address2_data
+        self.zipcode_data=zipcode_data
+        self.city_data=city_data
+        self.state_data=state_data
+        self.country_data=None
+
+
+    def set_country_data(self,country):
+        self.country_data=country
+
+
 class RegisterPage:
+
     def __init__(self,context):
         self.context=context
         self.page=context.page
@@ -35,6 +50,8 @@ class RegisterPage:
 
         self.create_account_button=self.page.locator("[data-qa='create-account']")
 
+        self.address_data=Address(self.faker.address(),self.faker.secondary_address(),self.faker.zipcode(),self.faker.city(),self.faker.state())
+
 
 
     def fill_firtsname(self,nombre=None):
@@ -61,13 +78,17 @@ class RegisterPage:
         self.date_of_birth_years_select.select_option(index=2)
         self.first_name_input.fill(self.faker.first_name())
         self.last_name_input.fill(self.faker.last_name())
-        self.address_input.fill(self.faker.address())
-        self.address2_input.fill(self.faker.secondary_address())
+        self.address_input.fill(self.address_data.address_data)
+        self.address2_input.fill(self.address_data.address2_data)
+
         self.country_select.select_option(index=1)
-        self.state_input.fill(self.faker.state())
-        self.city_input.fill(self.faker.city())
-        self.zipcode_input.fill(self.faker.zipcode())
+        self.address_data.set_country_data(self.country_select.input_value())
+
+        self.state_input.fill(self.address_data.state_data)
+        self.city_input.fill(self.address_data.city_data)
+        self.zipcode_input.fill(self.address_data.zipcode_data)
         self.mobile_number_input.fill("+12125550123")
+
     def click_create_account_button(self):
         self.create_account_button.click()
 

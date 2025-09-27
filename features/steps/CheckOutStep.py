@@ -1,8 +1,7 @@
 from behave import *
 
 from pages.CheckOutPage import CheckOutPage
-
-
+from pages.RegisterPage import RegisterPage
 
 
 @step("El usuario procede a pagar")
@@ -53,3 +52,17 @@ def step_impl6(context):
 def step_impl7(context):
     check_out_page:CheckOutPage=context.check_out_page
     check_out_page.verify_text_in_page("Register / Login account to proceed on checkout.")
+
+
+@then("El usuario debería visualizar que sus datos de dirección son iguales a los que ingreso cuando se registro")
+def step_impl8(context):
+    check_out_page:CheckOutPage=context.check_out_page
+    register_page:RegisterPage=context.register_page
+
+    check_out_page.verify_address(register_page.address_data)
+
+
+@step("El usuario descarga el recibo y verifica su contenido")
+def step_impl(context):
+    check_out_page:CheckOutPage=context.check_out_page
+    check_out_page.download_invoice()
