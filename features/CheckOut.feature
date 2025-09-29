@@ -32,7 +32,7 @@ Feature: Verificar funcionalidad de pago
 
   Scenario: Completar compra registrándose en el proceso de checkout
     Given El usuario está en la página principal
-    And El usuario esta en la pagina de login / registro
+    And El usuario navega a la página de login / registro
     When El usuario registra una nueva cuenta
     And El usuario navega a la página de Products
     And El usuario agrega un producto al carrito y cierra la ventana emergente
@@ -50,7 +50,7 @@ Feature: Verificar funcionalidad de pago
 
   Scenario: Completar compra estando registrado y verificando datos de envio
     Given El usuario está en la página principal
-    And El usuario esta en la pagina de login / registro
+    And El usuario navega a la página de login / registro
     When El usuario registra una nueva cuenta
     And El usuario navega a la página de Products
     And El usuario agrega un producto al carrito y cierra la ventana emergente
@@ -69,7 +69,7 @@ Feature: Verificar funcionalidad de pago
 
   Scenario: Completar compra y descargar recibo
     Given El usuario está en la página principal
-    And El usuario esta en la pagina de login / registro
+    And El usuario navega a la página de login / registro
     When El usuario registra una nueva cuenta
     And El usuario navega a la página de Products
     And El usuario agrega un producto al carrito y cierra la ventana emergente

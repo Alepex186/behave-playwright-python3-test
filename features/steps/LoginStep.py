@@ -67,3 +67,9 @@ def iniciar_sesion_completo(context,correo,contrasenia):
 def step_impl(context):
     home_page:HomePage=context.home_page
     home_page.click_signup_login()
+
+
+@given("El usuario navega a la página de login / registro")
+def step_impl2(context):
+    home_page:HomePage=context.home_page
+    home_page.click_signup_login()
