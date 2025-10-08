@@ -18,8 +18,8 @@ from pages.TestCasesPage import TestCasesPage
 
 load_dotenv()
 
-BROWSER = os.environ.get("browser","chromium").lower()
-HEADLESS = os.environ.get("headless", "false").lower() == "true"
+BROWSER = os.environ.get("BROWSER","chromium").lower()
+HEADLESS = os.environ.get("HEADLESS", "false").lower() == "true"
 HOME_PAGE_URL=os.environ.get("HOME_PAGE_URL","https://www.automationexercise.com/")
 
 def before_all(context):
