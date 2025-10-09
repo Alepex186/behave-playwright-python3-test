@@ -58,7 +58,7 @@ pip install -r requirements.txt
 playwright install
 ```
 
-### La configuración de navegadores y headless esta en el archivo `.env`, También es posible definir estas propiedades mediante variables de entorno, lo cual es útil en entornos como Jenkins o CI/CD.
+### La configuración de navegadores y headless esta en el archivo `.env`, también es posible definir estas propiedades mediante variables de entorno, lo cual es útil en entornos como Jenkins o CI/CD.
 
 - Windows(cmd): set HEADLESS=true
 - Linux/Mac: export HEADLESS=true
