@@ -35,13 +35,64 @@ def before_all(context):
     elif(BROWSER=="firefox"):
         context.browser=context.playwright.firefox.launch(headless=bool(HEADLESS))
     else:
-        raise ValueError("EL NEVEGADOR QUE DEFINISTES NO ES VALIDO")
+        raise ValueError("EL NAVEGADOR QUE DEFINISTE NO ES VALIDO")
 
 
 def before_scenario(context,scenario):
     context.browser_context=context.browser.new_context()
     context.page=context.browser_context.new_page()
+    context.browser_context.add_init_script("""
+        (() => {
+            const selector = "ins.adsbygoogle.adsbygoogle-noablate";
 
+            function remove_ad(el){
+                if(!el) return;
+
+                el.remove();
+                console.log("AdSense overlay eliminado");
+            }
+
+            function scanAndDestroy(root = document){
+                root.querySelectorAll(selector).forEach(remove_ad);
+            }
+
+            //Eliminar si ya existe
+            scanAndDestroy();
+
+            //Observer
+            const observer = new MutationObserver((mutations) => {
+                for (const m of mutations) {
+                    for (const node of m.addedNodes) {
+                        if (!(node instanceof HTMLElement)) continue;
+
+                        if (node.matches && node.matches(selector)) {
+                            remove_ad(node);
+                        }
+
+                        if (node.querySelectorAll) {
+                            node.querySelectorAll(selector).forEach(remove_ad);
+                        }
+                    }
+                }
+            });
+
+            observer.observe(document, {
+                childList: true,
+                subtree: true
+            });
+
+            //bloquear creación por appendChild
+            const originalAppend = Element.prototype.appendChild;
+            Element.prototype.appendChild = function(node){
+                if (node && node.matches && node.matches(selector)) {
+                    console.log("Intento de insertar ad bloqueado");
+                    return node;
+                }
+                return originalAppend.call(this, node);
+            };
+
+        })();
+        """)
     context.home_page=HomePage(context)
     context.login_page=LoginPage(context)
     context.register_page=RegisterPage(context)
