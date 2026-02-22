@@ -1,19 +1,15 @@
-from playwright.sync_api import Page
+from pages.BasePage import BasePage
 
 
-class SubscriptionPage:
-    def __init__(self,context):
-        self.page:Page=context.page
-        self.page.set_default_timeout(40000)
-        self.subscription_email_input=self.page.locator("input#susbscribe_email")
-        self.subscription_button=self.page.locator("button#subscribe")
+class SubscriptionPage(BasePage):
+    def __init__(self, context):
+        super().__init__(context)
+        # --- Selectores ---
+        self.SUBSCRIPTION_EMAIL_INPUT = "input#susbscribe_email"
+        self.SUBSCRIPTION_BUTTON = "button#subscribe"
 
     def fill_email(self, correo):
-        self.subscription_email_input.fill(correo)
+        self.fill_input(self.SUBSCRIPTION_EMAIL_INPUT, correo)
 
     def click_send_subscription(self):
-        self.subscription_button.click()
-
-    def verify_text_in_page(self, mensaje):
-        locator = self.page.locator(f"text='{mensaje}'")
-        assert locator.count() > 0, f"No se encontró el texto: {mensaje}"
+        self.click_element(self.SUBSCRIPTION_BUTTON)

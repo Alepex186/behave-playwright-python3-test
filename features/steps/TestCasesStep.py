@@ -14,4 +14,4 @@ def step_impl(context):
 def step_impl2(context):
     test_cases:TestCasesPage=context.test_cases_page
     mensaje_a_verificar="Test Cases"
-    test_cases.verify_text_in_page(mensaje_a_verificar)
+    test_cases.verify_text_in_element(mensaje_a_verificar)

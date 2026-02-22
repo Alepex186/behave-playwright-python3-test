@@ -1,27 +1,33 @@
+from pages.BasePage import BasePage
 
 
-from playwright.sync_api import Page
+class ProductsPage(BasePage):
+    def __init__(self, context):
+        super().__init__(context)
+        # --- Selectores: Detalle de producto ---
+        self.PRODUCT_NAME = "div.product-information h2"
+        self.PRODUCT_CATEGORY = "div.product-information p"
+        self.PRODUCT_PRICE = "div.product-information span span"
+        self.PRODUCT_AVAILABILITY = "div.product-information p"
+        self.PRODUCT_CONDITION = "div.product-information p"
+        self.PRODUCT_BRAND = "div.product-information p"
 
-
-class ProductsPage:
-    def __init__(self,context):
-        self.page:Page=context.page
-        self.page.set_default_timeout(40000)
-
-
-
+        # --- Selectores: Formulario de reseña ---
+        self.REVIEW_NAME_INPUT = "input#name"
+        self.REVIEW_EMAIL_INPUT = "input#email"
+        self.REVIEW_TEXTAREA = "textarea#review"
+        self.REVIEW_SUBMIT_BUTTON = "button#button-review"
 
     def click_item_view_product(self, index_product):
-        product=self.page.locator(f"[href='/product_details/{index_product}']")
-        product.click()
+        self.click_element(f"[href='/product_details/{index_product}']")
 
     def verify_view_product(self):
-        product_name_text=self.page.locator("div.product-information h2")
-        product_category=self.page.locator("div.product-information p",has_text="Category:")
-        product_price=self.page.locator("div.product-information span span",has_text="Rs.")
-        product_availability=self.page.locator("div.product-information p",has_text="Availability:")
-        product_condition=self.page.locator("div.product-information p",has_text="Condition:")
-        product_brand=self.page.locator("div.product-information p",has_text="Brand:")
+        product_name_text = self.page.locator(self.PRODUCT_NAME)
+        product_category = self.page.locator(self.PRODUCT_CATEGORY, has_text="Category:")
+        product_price = self.page.locator(self.PRODUCT_PRICE, has_text="Rs.")
+        product_availability = self.page.locator(self.PRODUCT_AVAILABILITY, has_text="Availability:")
+        product_condition = self.page.locator(self.PRODUCT_CONDITION, has_text="Condition:")
+        product_brand = self.page.locator(self.PRODUCT_BRAND, has_text="Brand:")
 
         assert len(product_name_text.text_content()) > 2
         assert len(product_category.text_content().split(":")[1]) > 2
@@ -31,20 +37,9 @@ class ProductsPage:
         assert len(product_brand.text_content().split(":")[1]) > 2
 
     def fill_review(self, nombre, correo, descripcion):
-        name_input=self.page.locator("input#name")
-        name_input.fill(nombre)
-
-        email_input=self.page.locator("input#email")
-        email_input.fill(correo)
-
-        review_textarea=self.page.locator("textarea#review")
-        review_textarea.fill(descripcion)
+        self.fill_input(self.REVIEW_NAME_INPUT, nombre)
+        self.fill_input(self.REVIEW_EMAIL_INPUT, correo)
+        self.fill_input(self.REVIEW_TEXTAREA, descripcion)
 
     def send_review_formulary(self):
-        submit_button=self.page.locator("button#button-review")
-        submit_button.click()
-
-    def verify_text_in_page(self, text):
-        locator = self.page.locator(f"text='{text}'")
-        assert locator.count() > 0, f"No se encontró el texto: {text}"
-
+        self.click_element(self.REVIEW_SUBMIT_BUTTON)

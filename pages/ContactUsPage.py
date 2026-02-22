@@ -1,31 +1,25 @@
 import time
 
-from playwright.sync_api import Page
+from pages.BasePage import BasePage
 
 
-class ContactUsPage:
-    def __init__(self,context):
-        self.page:Page=context.page
-        self.page.set_default_timeout(20000)
-        self.name_input=self.page.locator("[data-qa='name']")
-        self.email_input=self.page.locator("[data-qa='email']")
-        self.subject_input=self.page.locator("[data-qa='subject']")
-        self.message_input=self.page.locator("[data-qa='message']")
-        self.submit_button=self.page.locator("[data-qa='submit-button']")
+class ContactUsPage(BasePage):
+    def __init__(self, context):
+        super().__init__(context)
+        # --- Selectores ---
+        self.NAME_INPUT = "[data-qa='name']"
+        self.EMAIL_INPUT = "[data-qa='email']"
+        self.SUBJECT_INPUT = "[data-qa='subject']"
+        self.MESSAGE_INPUT = "[data-qa='message']"
+        self.SUBMIT_BUTTON = "[data-qa='submit-button']"
 
     def fill_formulary(self, nombre, correo, asunto, mensaje):
-        self.name_input.fill(nombre)
-        self.email_input.fill(correo)
-        self.subject_input.fill(asunto)
-        self.message_input.fill(mensaje)
-
+        self.fill_input(self.NAME_INPUT, nombre)
+        self.fill_input(self.EMAIL_INPUT, correo)
+        self.fill_input(self.SUBJECT_INPUT, asunto)
+        self.fill_input(self.MESSAGE_INPUT, mensaje)
 
     def click_submit(self):
         self.page.once("dialog", lambda dialog: dialog.accept())
         time.sleep(1)
-        self.submit_button.click()
-
-
-    def verify_text_in_page(self, text):
-        locator = self.page.locator(f"text={text}")
-        assert locator.count() > 0, f"No se encontró el texto: {text}"
+        self.click_element(self.SUBMIT_BUTTON)

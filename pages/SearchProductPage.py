@@ -1,32 +1,32 @@
-
-from playwright.sync_api import Page
-
-
-class SearchProductPage:
-    def __init__(self,context):
-        self.page:Page=context.page
-        self.products=self.page.locator("div.features_items div.col-sm-4")
+from pages.BasePage import BasePage
 
 
+class SearchProductPage(BasePage):
+    def __init__(self, context):
+        super().__init__(context)
+        # --- Selectores ---
+        self.SEARCH_INPUT = "input[id='search_product']"
+        self.SEARCH_BUTTON = "button[id='submit_search']"
+        self.PRODUCTS_GRID = "div.features_items div.col-sm-4"
+        self.PRODUCT_ID_LINKS = "a[data-product-id]"
 
     def fill_search(self, texto):
-        search_product_input=self.page.locator("input[id='search_product']")
-        search_product_input.fill(texto)
+        self.fill_input(self.SEARCH_INPUT, texto)
 
     def click_search_button(self):
-        search_product_button=self.page.locator("button[id='submit_search']")
-        search_product_button.click()
+        self.click_element(self.SEARCH_BUTTON)
 
     def verify_products(self):
-        products=self.page.locator("div.features_items div.col-sm-4")
-        assert products.count() > 0,"No se encontraron elementos"
+        self.verify_element_count(self.PRODUCTS_GRID, min_count=1)
 
     def get_all_products_id(self):
-        products_index_list=[]
-        products_index=self.products.locator("a[data-product-id]")
+        products_index_list = []
+        products = self.page.locator(self.PRODUCTS_GRID)
+        products_index = products.locator(self.PRODUCT_ID_LINKS)
+
         for i in range(products_index.count()):
-            product_id=products_index.nth(i).get_attribute("data-product-id")
+            product_id = products_index.nth(i).get_attribute("data-product-id")
             products_index_list.append(product_id)
 
-        products_index_list=list(dict.fromkeys(products_index_list))
+        products_index_list = list(dict.fromkeys(products_index_list))
         return products_index_list

@@ -1,26 +1,24 @@
-class LoginPage:
-    def __init__(self,context):
-        self.context=context
-        self.page=context.page
-        self.page.set_default_timeout(20000)
-        self.email_input=self.page.locator('[data-qa="login-email"]')
-        self.password_input=self.page.locator('[data-qa="login-password"]')
-        self.login_button=self.page.locator('[data-qa="login-button"]')
+from pages.BasePage import BasePage
 
-    def fill_email(self,email):
-        self.email_input.fill(email)
 
-    def fill_password(self,password):
-        self.password_input.fill(password)
+class LoginPage(BasePage):
+    def __init__(self, context):
+        super().__init__(context)
+        # --- Selectores ---
+        self.EMAIL_INPUT = '[data-qa="login-email"]'
+        self.PASSWORD_INPUT = '[data-qa="login-password"]'
+        self.LOGIN_BUTTON = '[data-qa="login-button"]'
+
+    def fill_email(self, email):
+        self.fill_input(self.EMAIL_INPUT, email)
+
+    def fill_password(self, password):
+        self.fill_input(self.PASSWORD_INPUT, password)
 
     def click_login(self):
-        self.login_button.click()
+        self.click_element(self.LOGIN_BUTTON)
 
-    def full_login(self,email,password):
-        self.email_input.fill(email)
-        self.password_input.fill(password)
-        self.login_button.click()
-
-    def verify_text_in_page(self,mensaje:str):
-        locator = self.page.locator(f"text='{mensaje}'")
-        assert locator.count() > 0, f"No se encontró el texto: {mensaje}"
+    def full_login(self, email, password):
+        self.fill_email(email)
+        self.fill_password(password)
+        self.click_login()
